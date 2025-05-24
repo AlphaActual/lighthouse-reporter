@@ -1,0 +1,7 @@
+URL,Metric,Score_Percentage,Value,Unit,Throttling_Config,Form_Factor,Timestamp
+https://www.hcl.hr/,First Contentful Paint,89%,1.83,s,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
+https://www.hcl.hr/,Largest Contentful Paint,74%,3.13,s,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
+https://www.hcl.hr/,Speed Index,99%,2.28,s,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
+https://www.hcl.hr/,Time to Interactive,90%,3.69,s,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
+https://www.hcl.hr/,Total Blocking Time,47%,629,ms,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
+https://www.hcl.hr/,Cumulative Layout Shift,100%,N/A,,10240Kbps_40ms_1x,mobile,2025-05-24T12:14:14.009Z
