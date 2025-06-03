@@ -1,3 +1,6 @@
 node_modules
 package-lock.json
 lighthouse_performance_report*
+
+# Test output directory
+output/

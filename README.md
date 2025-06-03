@@ -1,137 +1,235 @@
-# Lighthouse Data Extractor
+# Lighthouse Render Strategy Tester
 
-A Node.js tool for running multiple Lighthouse performance audits on websites and extracting the results into CSV format for analysis. This tool enables automated performance monitoring with configurable network conditions and device emulation.
+A comprehensive Lighthouse testing suite for comparing performance across different rendering strategies (CSR, SSR, SSG, ISR) and frameworks (Next.js, Nuxt.js, SvelteKit).
 
-## Features
+## 📋 Features
 
-- **Multiple Test Runs**: Execute multiple Lighthouse audits to get reliable performance data
-- **Configurable Network Conditions**: Customize throttling settings for different network scenarios
-- **Device Emulation**: Test with mobile or desktop emulation
-- **CSV Export**: Export performance metrics to CSV format for easy analysis
-- **Key Performance Metrics**: Focus on Core Web Vitals and essential performance indicators
-- **Headless Testing**: Run tests in headless Chrome for automation
+- **Multiple Rendering Strategies**: Test CSR, SSR, SSG, and ISR applications
+- **Framework Comparison**: Compare Next.js, Nuxt.js, and SvelteKit implementations
+- **Device Profiles**: Mobile, desktop, and slow 3G testing scenarios
+- **Organized Output**: Results automatically saved to strategy-specific folders
+- **Comprehensive Reports**: Individual test results and comparison reports
+- **CLI Interface**: Easy-to-use command line interface
+- **NPM Scripts**: Predefined scripts for common testing scenarios
 
-## Performance Metrics Tracked
+## 🚀 Quick Start
 
-- **First Contentful Paint (FCP)**: Time when the first text or image is painted
-- **Largest Contentful Paint (LCP)**: Time when the largest text or image is painted
-- **Speed Index**: How quickly the contents of a page are visibly populated
-- **Time to Interactive (TTI)**: Time until the page is fully interactive
-- **Total Blocking Time (TBT)**: Sum of all time periods between FCP and TTI
-- **Cumulative Layout Shift (CLS)**: Measure of visual stability
+### Installation
 
-## Installation
-
-1. Clone this repository:
-```bash
-git clone <repository-url>
-cd LightHouseDataExtractor
-```
-
-2. Install dependencies:
 ```bash
 npm install
 ```
 
-## Usage
-
 ### Basic Usage
 
-1. Edit the configuration in `lighthouseTest.js`:
-```javascript
-const siteUrl = 'https://www.hcl.hr/'; // Change to your target URL
-const numberOfRuns = 5; // Configure number of test runs
-```
-
-2. Run the performance test:
+Run all tests with mobile profile:
 ```bash
-node lighthouseTest.js
+npm run test:all
 ```
 
-3. View results in the generated CSV file:
-```
-lighthouse_performance_report_5runs_2025-05-24T17-25-16-287Z.csv
+Test a specific rendering strategy:
+```bash
+npm run test:csr
+npm run test:ssr
+npm run test:ssg
+npm run test:isr
 ```
 
-### Configuration Options
+Test with different device profiles:
+```bash
+npm run test:all:desktop
+npm run test:all:slow3g
+```
 
-#### Network Throttling
+Test individual applications:
+```bash
+npm run test:nextjs-csr
+npm run test:nuxtjs-ssr
+npm run test:sveltekit-ssg
+```
+
+## 📊 Testing Profiles
+
+### Mobile (Default)
+- Form Factor: Mobile
+- Network: 10 Mbps, 40ms RTT
+- CPU: 1x slowdown
+
+### Desktop
+- Form Factor: Desktop  
+- Network: 40 Mbps, 40ms RTT
+- CPU: 1x slowdown
+
+### Slow 3G
+- Form Factor: Mobile
+- Network: 1.6 Mbps, 300ms RTT  
+- CPU: 4x slowdown
+
+## 🎯 Test Applications
+
+### 🔄 CSR (Client-Side Rendering)
+- Next.js CSR: https://render-strategy-demo-csr-next-app-c.vercel.app/
+- Nuxt.js CSR: https://render-strategy-demo-csr-nuxt-app-c.vercel.app/
+- SvelteKit CSR: https://render-strategy-demo-csr-sveltekit.vercel.app/
+
+### 🚀 SSR (Server-Side Rendering)  
+- Next.js SSR: https://render-strategy-demo-next-app-ssr.vercel.app/
+- Nuxt.js SSR: https://render-strategy-demo-nuxt-app-ssr.vercel.app/
+- SvelteKit SSR: https://render-strategy-demo-sveltekit-app.vercel.app/
+
+### ⚡ SSG (Static Site Generation)
+- Next.js SSG: https://render-strategy-demo-next-app-ssg.vercel.app/
+- Nuxt.js SSG: https://render-strategy-demo-nuxt-app-ssg.vercel.app/
+- SvelteKit SSG: https://render-strategy-demo-sveltekit-app-nine.vercel.app/
+
+### 🔁 ISR (Incremental Static Regeneration)
+- Next.js ISR: https://render-strategy-demo-next-app-isr.vercel.app/
+- Nuxt.js ISR: https://render-strategy-demo-nuxt-app-isr.vercel.app/
+- SvelteKit ISR: https://render-strategy-demo-sveltekit-app-rho.vercel.app/
+
+## 📁 Output Structure
+
+```
+output/
+├── master_comparison_mobile_2025-06-03T10-30-45-123Z.csv
+├── csr/
+│   ├── nextjs-csr_mobile_5runs_2025-06-03T10-15-30-456Z.csv
+│   ├── nuxtjs-csr_mobile_5runs_2025-06-03T10-20-15-789Z.csv
+│   ├── sveltekit-csr_mobile_5runs_2025-06-03T10-25-00-012Z.csv
+│   └── csr_comparison_mobile_2025-06-03T10-30-45-345Z.csv
+├── ssr/
+│   ├── nextjs-ssr_mobile_5runs_2025-06-03T10-35-30-678Z.csv
+│   └── ssr_comparison_mobile_2025-06-03T10-45-15-901Z.csv
+├── ssg/
+│   └── ssg_comparison_mobile_2025-06-03T10-55-00-234Z.csv
+└── isr/
+    └── isr_comparison_mobile_2025-06-03T11-05-45-567Z.csv
+```
+
+## 🛠 CLI Usage
+
+```bash
+# Run all tests
+node cli.js all [profile]
+
+# Test specific strategy
+node cli.js strategy <strategy> [profile]
+
+# Test specific app
+node cli.js app <strategy> <app> [profile]
+
+# Show help
+node cli.js help
+```
+
+### Examples:
+
+```bash
+# Test all CSR apps with desktop profile
+node cli.js strategy csr desktop
+
+# Test specific Next.js CSR app with slow 3G
+node cli.js app csr nextjs-csr slow3g
+
+# Run comprehensive test on all apps
+node cli.js all mobile
+```
+
+## 📊 Metrics Captured
+
+- **First Contentful Paint (FCP)**: Time to first content render
+- **Largest Contentful Paint (LCP)**: Time to largest element render  
+- **Speed Index**: Visual completeness over time
+- **Time to Interactive (TTI)**: Time until page is fully interactive
+- **Total Blocking Time (TBT)**: Total time tasks block main thread
+- **Cumulative Layout Shift (CLS)**: Visual stability metric
+
+## ⚙️ Configuration
+
+Edit `config.js` to customize:
+
+- Number of test runs per application
+- Output directory structure
+- Lighthouse testing profiles
+- Application URLs
+- Chrome launcher flags
+- Lighthouse options
+
+## 📈 Report Types
+
+### Individual Test Reports
+- Detailed results for each test run
+- All metrics with values and scores
+- Timestamps and configuration details
+
+### Comparison Reports  
+- Average, minimum, and maximum values
+- Strategy-level comparisons
+- Framework performance analysis
+
+### Master Report
+- Cross-strategy performance comparison
+- Complete overview of all applications
+- Framework ranking by rendering strategy
+
+## 🔧 Advanced Usage
+
+### Custom Test Profiles
+
+Add new profiles in `config.js`:
+
 ```javascript
-const lighthouseConfig = {
-  throttling: {
-    rttMs: 40,                    // Round trip time in milliseconds
-    throughputKbps: 10240,        // Download throughput in Kbps (10 Mbps)
-    cpuSlowdownMultiplier: 1,     // CPU slowdown multiplier
-    downloadThroughputKbps: 10240,
-    uploadThroughputKbps: 1024
+testProfiles: {
+  custom: {
+    emulatedFormFactor: 'mobile',
+    throttling: {
+      rttMs: 100,
+      throughputKbps: 5000,
+      cpuSlowdownMultiplier: 2
+    }
   }
-};
+}
 ```
 
-#### Device Emulation
+### Adding New Applications
+
+Extend the applications configuration:
+
 ```javascript
-emulatedFormFactor: 'mobile', // 'mobile' or 'desktop'
+applications: {
+  csr: {
+    apps: {
+      'my-app': {
+        name: 'My Custom App',
+        url: 'https://my-app.example.com',
+        framework: 'Custom'
+      }
+    }
+  }
+}
 ```
 
-## Output Format
+## 🔍 Interactive Testing
 
-The tool generates a CSV file with the following structure:
+For guided testing scenarios, use the interactive interface:
 
-| Column | Description |
-|--------|-------------|
-| Run | Test run number |
-| URL | Target URL tested |
-| Timestamp | ISO timestamp of the test |
-| Form_Factor | Device emulation used (mobile/desktop) |
-| Throttling_Config | Network throttling configuration |
-| [Metric]_Value | Numeric value for each performance metric |
-| [Metric]_Score_% | Lighthouse score percentage (0-100) |
-
-### Sample Output
-```csv
-Run,URL,Timestamp,Form_Factor,Throttling_Config,First Contentful Paint_Value,First Contentful Paint_Score_%,...
-1,https://www.hcl.hr/,2025-05-24T17:21:25.797Z,mobile,10240Kbps_40ms_1x,3.37,38,...
-2,https://www.hcl.hr/,2025-05-24T17:22:23.776Z,mobile,10240Kbps_40ms_1x,2.73,59,...
+```bash
+npm run interactive
 ```
 
-## Dependencies
+This provides step-by-step guidance for:
+- Testing specific rendering strategies
+- Comparing framework performance
+- Running comprehensive analysis
+- Generating detailed reports
 
-- **lighthouse**: Google's Lighthouse performance auditing tool
-- **chrome-launcher**: Programmatic Chrome browser launching
-- **lighthouse-batch**: Batch processing utilities for Lighthouse
+## 📚 Additional Resources
 
-## Use Cases
+- [Quick Start Guide](QUICK_START.md) - Get up and running in minutes
+- [Testing Guide](TESTING_GUIDE.md) - Comprehensive testing scenarios
+- [Setup Complete](SETUP_COMPLETE.md) - Post-setup verification
 
-- **Performance Monitoring**: Regular performance checks for websites
-- **A/B Testing**: Compare performance between different versions
-- **Performance Regression Testing**: Ensure performance doesn't degrade over time
-- **Optimization Validation**: Measure impact of performance improvements
-- **Reporting**: Generate performance reports for stakeholders
-
-## Best Practices
-
-1. **Multiple Runs**: Always run multiple tests (3-5 runs minimum) to account for variability
-2. **Consistent Environment**: Use the same network and device settings for comparable results
-3. **Regular Testing**: Set up automated testing to catch performance regressions early
-4. **Baseline Comparison**: Establish performance baselines and track changes over time
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Chrome Not Found**: Ensure Chrome is installed and accessible
-2. **Network Errors**: Check network connectivity and URL accessibility
-3. **Permission Errors**: Ensure write permissions for CSV output directory
-
-### Error Handling
-
-The tool includes error handling for:
-- Failed Lighthouse audits
-- Chrome launch failures
-- Network connectivity issues
-- File system errors
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -139,10 +237,10 @@ The tool includes error handling for:
 4. Test thoroughly
 5. Submit a pull request
 
-## License
+## 📝 License
 
-This project is open source. Please refer to the LICENSE file for details.
+MIT License - feel free to use and modify for your testing needs.
 
-## Support
+## 🆘 Support
 
 For issues and questions, please create an issue in the repository or contact the maintainer.
