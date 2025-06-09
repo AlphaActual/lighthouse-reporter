@@ -7,9 +7,29 @@ const runner = new LighthouseTestRunner();
 // Parse command line arguments
 const args = process.argv.slice(2);
 const command = args[0];
-const strategy = args[1];
-const app = args[2];
-const profile = args[3] || 'mobile';
+
+let strategy, app, profile, page;
+
+switch (command) {
+  case 'all':
+    profile = args[1] || 'mobile';
+    page = args[2] || 'home';
+    break;
+  case 'strategy':
+    strategy = args[1];
+    profile = args[2] || 'mobile';
+    page = args[3] || 'home';
+    break;
+  case 'app':
+    strategy = args[1];
+    app = args[2];
+    profile = args[3] || 'mobile';
+    page = args[4] || 'home';
+    break;
+  default:
+    // For help and unknown commands
+    break;
+}
 
 const showHelp = () => {
   console.log(`
@@ -19,9 +39,9 @@ Usage:
   node cli.js <command> [options]
 
 Commands:
-  all [profile]                    - Run tests on all applications
-  strategy <strategy> [profile]   - Run tests on all apps in a strategy
-  app <strategy> <app> [profile]  - Run test on a specific app
+  all [profile] [page]                    - Run tests on all applications
+  strategy <strategy> [profile] [page]   - Run tests on all apps in a strategy
+  app <strategy> <app> [profile] [page]  - Run test on a specific app
 
 Strategies:
   csr  - Client-Side Rendering
@@ -34,10 +54,17 @@ Profiles:
   desktop  - Desktop simulation
   slow3g   - Slow 3G network simulation
 
+Pages:
+  home     - Homepage / landing page (default)
+  about    - About page (/about)
+  blog     - Blog listing page (/blog)
+  blogPost - Blog post page (/blog/1)
+
 Examples:
-  node cli.js all mobile
-  node cli.js strategy csr desktop
-  node cli.js app csr nextjs-csr slow3g
+  node cli.js all mobile home
+  node cli.js strategy csr desktop about
+  node cli.js app csr nextjs-csr slow3g blog
+  node cli.js app ssr nuxtjs-ssr mobile blogPost
   node cli.js help
 
 Available Apps:
@@ -52,23 +79,23 @@ const main = async () => {
   try {
     switch (command) {
       case 'all':
-        await runner.runAllTests(profile);
+        await runner.runAllTests(profile, page);
         break;
         
       case 'strategy':
         if (!strategy) {
-          console.error('❌ Strategy required. Use: node cli.js strategy <strategy> [profile]');
+          console.error('❌ Strategy required. Use: node cli.js strategy <strategy> [profile] [page]');
           process.exit(1);
         }
-        await runner.runStrategyTests(strategy, profile);
+        await runner.runStrategyTests(strategy, profile, page);
         break;
         
       case 'app':
         if (!strategy || !app) {
-          console.error('❌ Strategy and app required. Use: node cli.js app <strategy> <app> [profile]');
+          console.error('❌ Strategy and app required. Use: node cli.js app <strategy> <app> [profile] [page]');
           process.exit(1);
         }
-        await runner.runTest(app, strategy, profile);
+        await runner.runTest(app, strategy, profile, page);
         break;
         
       case 'help':

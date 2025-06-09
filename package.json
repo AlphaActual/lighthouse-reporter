@@ -7,10 +7,14 @@
     "interactive": "node interactive.js",
     "scripts": "node list-scripts.js",
     "demo": "node demo.js",
+    "test-pages": "node test-pages.js",
     "test:all": "node cli.js all",
     "test:all:mobile": "node cli.js all mobile",
     "test:all:desktop": "node cli.js all desktop",
     "test:all:slow3g": "node cli.js all slow3g",
+    "test:all:about": "node cli.js all mobile about",
+    "test:all:blog": "node cli.js all mobile blog",
+    "test:all:blogPost": "node cli.js all mobile blogPost",
     "test:csr": "node cli.js strategy csr",
     "test:csr:mobile": "node cli.js strategy csr mobile",
     "test:csr:desktop": "node cli.js strategy csr desktop",
@@ -39,7 +43,13 @@
     "test:nextjs-isr": "node cli.js app isr nextjs-isr",
     "test:nuxtjs-isr": "node cli.js app isr nuxtjs-isr",
     "test:sveltekit-isr": "node cli.js app isr sveltekit-isr",
-    "help": "node cli.js help"
+    "help": "node cli.js help",
+    "retry:nan": "node nan-retry-handler.js",
+    "retry:failed": "node retry-failed.js",
+    "retry:check-urls": "node nan-retry-handler.js --check-urls",
+    "retry:analyze": "node nan-retry-handler.js --analyze-only",
+    "test:retry": "node test-retry.js",
+    "test:problematic": "node test-problematic.js"
   },
   "keywords": [
     "lighthouse",
@@ -56,6 +66,7 @@
   "dependencies": {
     "chrome-launcher": "^1.2.0",
     "lighthouse": "^12.6.0",
-    "lighthouse-batch": "^8.1.1"
+    "lighthouse-batch": "^8.1.1",
+    "node-fetch": "^2.6.12"
   }
 }
