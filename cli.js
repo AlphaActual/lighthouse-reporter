@@ -53,6 +53,7 @@ Profiles:
   mobile   - Mobile device simulation (default)
   desktop  - Desktop simulation
   slow3g   - Slow 3G network simulation
+  slow4g   - Slow 4G network simulation
 
 Pages:
   home     - Homepage / landing page (default)

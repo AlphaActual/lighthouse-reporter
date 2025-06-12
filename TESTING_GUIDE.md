@@ -5,7 +5,7 @@
 ### 🏗️ Core Components
 1. **Configuration System** (`config.js`)
    - Centralized configuration for all test parameters
-   - Multiple device profiles (mobile, desktop, slow3g)
+   - Multiple device profiles (mobile, desktop, slow3g, slow4g)
    - All 12 web applications organized by rendering strategy
    - Customizable Lighthouse settings
 

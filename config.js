@@ -1,7 +1,7 @@
 // Configuration for Lighthouse testing of different rendering strategies
 const config = {
   // Global test settings
-  numberOfRuns: 3,
+  numberOfRuns: 10,
   outputDirectory: './output',
   
   // Lighthouse configurations for different scenarios
@@ -31,8 +31,7 @@ const config = {
       },
       disableDeviceEmulation: false,
       disableStorageReset: false
-    },
-    slow3g: {
+    },    slow3g: {
       emulatedFormFactor: 'mobile',
       throttling: {
         rttMs: 300,
@@ -41,6 +40,19 @@ const config = {
         requestLatencyMs: 300,
         downloadThroughputKbps: 1600,
         uploadThroughputKbps: 750
+      },
+      disableDeviceEmulation: false,
+      disableStorageReset: false
+    },
+    slow4g: {
+      emulatedFormFactor: 'mobile',
+      throttling: {
+        rttMs: 150,
+        throughputKbps: 3000, // Slow 4G
+        cpuSlowdownMultiplier: 2,
+        requestLatencyMs: 150,
+        downloadThroughputKbps: 3000,
+        uploadThroughputKbps: 1500
       },
       disableDeviceEmulation: false,
       disableStorageReset: false

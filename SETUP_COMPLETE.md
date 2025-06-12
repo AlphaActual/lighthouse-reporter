@@ -87,6 +87,7 @@ npm run test:isr:mobile        # ISR comparison
 node cli.js app csr nextjs-csr mobile
 node cli.js app csr nextjs-csr desktop
 node cli.js app csr nextjs-csr slow3g
+node cli.js app csr nextjs-csr slow4g
 ```
 
 ### Phase 4: Complete Analysis (30-45 minutes)

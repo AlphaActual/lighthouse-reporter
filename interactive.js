@@ -49,12 +49,11 @@ class InteractiveTester {
       console.log(`${key}. ${scenario.name}`);
     });
     console.log('');
-  }
-  async runFrameworkComparison(strategy) {
+  }  async runFrameworkComparison(strategy) {
     console.log(`\n🏁 Starting ${strategy.toUpperCase()} Framework Comparison`);
     console.log('This will test all frameworks (Next.js, Nuxt.js, SvelteKit) for', strategy.toUpperCase());
     
-    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g) [mobile]: ') || 'mobile';
+    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g/slow4g) [mobile]: ') || 'mobile';
     const page = await this.getInput('Choose page (home/about/blog/blogPost) [home]: ') || 'home';
     
     try {
@@ -75,9 +74,8 @@ class InteractiveTester {
     
     console.log(`\nTesting ${app} ${page} page across all network conditions...`);
     
-    try {
-      // Test across all network profiles
-      for (const profile of ['mobile', 'desktop', 'slow3g']) {
+    try {      // Test across all network profiles
+      for (const profile of ['mobile', 'desktop', 'slow3g', 'slow4g']) {
         console.log(`\n📊 Testing with ${profile} profile...`);
         await this.runner.runTest(app, strategy, profile, page);
       }
@@ -91,10 +89,9 @@ class InteractiveTester {
   }
   async runSingleAppAnalysis() {
     console.log('\n🔍 Single App Deep Dive Analysis');
-    
-    const strategy = await this.getInput('Choose strategy (csr/ssr/ssg/isr): ');
+      const strategy = await this.getInput('Choose strategy (csr/ssr/ssg/isr): ');
     const app = await this.getInput(`Choose app (nextjs-${strategy}/nuxtjs-${strategy}/sveltekit-${strategy}): `);
-    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g) [mobile]: ') || 'mobile';
+    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g/slow4g) [mobile]: ') || 'mobile';
     const page = await this.getInput('Choose page (home/about/blog/blogPost) [home]: ') || 'home';
     
     // Increase runs for more detailed analysis
@@ -123,10 +120,9 @@ class InteractiveTester {
     if (confirm.toLowerCase() !== 'y' && confirm.toLowerCase() !== 'yes') {
       console.log('❌ Analysis cancelled.');
       await this.continueOrExit();
-      return;
-    }
+      return;    }
     
-    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g) [mobile]: ') || 'mobile';
+    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g/slow4g) [mobile]: ') || 'mobile';
     const page = await this.getInput('Choose page (home/about/blog/blogPost) [home]: ') || 'home';
     
     console.log(`\n🚀 Starting comprehensive analysis with ${profile} profile on ${page} page...`);
@@ -144,9 +140,8 @@ class InteractiveTester {
   async runPageSpecificTest() {
     console.log('\n📄 Page-Specific Performance Testing');
     console.log('Compare how different pages perform across frameworks');
-    
-    const strategy = await this.getInput('Choose strategy (csr/ssr/ssg/isr) [csr]: ') || 'csr';
-    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g) [mobile]: ') || 'mobile';
+      const strategy = await this.getInput('Choose strategy (csr/ssr/ssg/isr) [csr]: ') || 'csr';
+    const profile = await this.getInput('Choose profile (mobile/desktop/slow3g/slow4g) [mobile]: ') || 'mobile';
     
     console.log('\nAvailable pages:');
     console.log('  home     - Homepage / landing page');
@@ -175,10 +170,9 @@ class InteractiveTester {
   }
   async runCustomTest() {
     console.log('\n⚙️  Custom Test Configuration');
-    
-    const strategy = await this.getInput('Strategy (csr/ssr/ssg/isr): ');
+      const strategy = await this.getInput('Strategy (csr/ssr/ssg/isr): ');
     const app = await this.getInput(`App (nextjs-${strategy}/nuxtjs-${strategy}/sveltekit-${strategy}): `);
-    const profile = await this.getInput('Profile (mobile/desktop/slow3g): ');
+    const profile = await this.getInput('Profile (mobile/desktop/slow3g/slow4g): ');
     const page = await this.getInput('Page (home/about/blog/blogPost) [home]: ') || 'home';
     const runs = await this.getInput('Number of runs [5]: ') || '5';
     

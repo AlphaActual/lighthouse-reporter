@@ -48,6 +48,9 @@ npm run test:all:desktop
 
 # Slow 3G network simulation
 npm run test:all:slow3g
+
+# Slow 4G network simulation
+npm run test:all:slow4g
 ```
 
 ### Quick Demo
@@ -105,6 +108,7 @@ npm run test:ssr:desktop
 node cli.js app csr nextjs-csr mobile
 node cli.js app csr nextjs-csr desktop  
 node cli.js app csr nextjs-csr slow3g
+node cli.js app csr nextjs-csr slow4g
 
 # Compare results to understand network impact
 ```

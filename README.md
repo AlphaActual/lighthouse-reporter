@@ -39,6 +39,7 @@ Test with different device profiles:
 ```bash
 npm run test:all:desktop
 npm run test:all:slow3g
+npm run test:all:slow4g
 ```
 
 Test individual applications:
@@ -64,6 +65,11 @@ npm run test:sveltekit-ssg
 - Form Factor: Mobile
 - Network: 1.6 Mbps, 300ms RTT  
 - CPU: 4x slowdown
+
+### Slow 4G
+- Form Factor: Mobile
+- Network: 3 Mbps, 150ms RTT
+- CPU: 2x slowdown
 
 ## 🎯 Test Applications
 
@@ -130,6 +136,9 @@ node cli.js strategy csr desktop
 
 # Test specific Next.js CSR app with slow 3G
 node cli.js app csr nextjs-csr slow3g
+
+# Test specific app with slow 4G
+node cli.js app ssr nuxtjs-ssr slow4g
 
 # Run comprehensive test on all apps
 node cli.js all mobile
