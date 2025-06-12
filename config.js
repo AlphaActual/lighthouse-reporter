@@ -162,16 +162,19 @@ const config = {
       description: 'Individual blog post'
     }
   },
-  
-  // Chrome launcher settings
+    // Chrome launcher settings
   chromeFlags: [
     '--headless',
     '--no-sandbox',
     '--disable-dev-shm-usage',
     '--disable-extensions',
-    '--disable-gpu'
-  ],
-    // Lighthouse options
+    '--disable-gpu',
+    '--disable-web-security',
+    '--disable-features=VizDisplayCompositor',
+    '--disable-background-timer-throttling',
+    '--disable-renderer-backgrounding',
+    '--disable-backgrounding-occluded-windows'
+  ],    // Lighthouse options
   lighthouseOptions: {
     logLevel: 'info',
     output: 'json',
@@ -182,6 +185,8 @@ const config = {
     throttlingMethod: 'simulate', // Use simulation for more stable results
     maxWaitForFcp: 15000, // Increase wait time for FCP
     maxWaitForLoad: 35000, // Increase wait time for load
+    // Ensure consistent cache behavior
+    clearStorageTypes: ['file_systems', 'shader_cache', 'service_workers', 'cache_storage'],
     // Skip audits that can cause dependency graph issues
     skipAudits: ['uses-rel-preconnect', 'uses-rel-preload']
   }
